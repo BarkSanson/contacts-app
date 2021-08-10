@@ -21,14 +21,38 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="/about">About</a>
         </li>
+        {{#if user}}
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle text-white"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Contacts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/contacts">See my contacts</a></li>
+              <li><a class="dropdown-item" href="/contacts/add">Add contact</a></li>
+            </ul>
+          </li>
+        {{/if}}
       </ul>
       <ul class="navbar-nav ms-auto gap-2">
-        <li class="nav-item">
-          <a class="btn btn-light" href="/users/signup">Sign up</a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-secondary" href="/users/signin">Sign in</a>
-        </li>
+        {{#if user}}
+          <li class="nav-item">
+            <a class="btn btn-danger" href="/users/logout">Log out</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="btn btn-light" href="/users/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-secondary" href="/users/signin">Sign in</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>

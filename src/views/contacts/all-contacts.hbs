@@ -1,55 +1,63 @@
 <div class="container mt-3">
   <div class="row">
     {{#each contacts}}
-      <div class="col-md-3">
-        <div class="card bg-primary">
-          <div class="card-body text-white">
-            <form>
-              <fieldset disabled="disabled">
-                <div>
-                  <label class="form-label" for="name">Name</label>
-                  <input class="form-control" name="name" value="{{{name}}}" />
-                </div>
-                <div>
-                  <label class="form-label" for="surname">Surame</label>
-                  <input
-                    class="form-control"
-                    name="surname"
-                    value="{{{surname}}}"
-                  />
-                </div>
-                <div>
-                  <label class="form-label" for="email">Email</label>
-                  <input
-                    class="form-control"
-                    name="email"
-                    value="{{{email}}}"
-                  />
-                </div>
-                <div>
-                  <label class="form-label" for="phone">Phone</label>
-                  <input
-                    class="form-control"
-                    name="phone"
-                    value="{{{phone}}}"
-                  />
-                </div>
-              </fieldset>
-              <div class="d-grid gap-1 mt-3">
-                <a class="btn btn-secondary" href="/contacts/edit/{{{_id}}}"><i
-                    class="fas fa-edit"
-                  ></i></a>
-                <a class="btn btn-danger" href="/contacts/delete/{{{_id}}}"><i
-                    class="fas fa-trash"
-                  ></i></a>
+    <div class="col-md-3">
+      <div class="card bg-primary">
+        <div class="card-body text-white">
+          <form>
+            <fieldset disabled="disabled">
+              <div>
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" name="name" value="{{{name}}}" />
               </div>
+              <div>
+                <label class="form-label" for="surname">Surame</label>
+                <input class="form-control" name="surname" value="{{{surname}}}" />
+              </div>
+              <div>
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" name="email" value="{{{email}}}" />
+              </div>
+              <div>
+                <label class="form-label" for="phone">Phone</label>
+                <input class="form-control" name="phone" value="{{{phone}}}" />
+              </div>
+            </fieldset>
+            <div class="d-grid gap-2 mt-2">
+              <a class="btn btn-secondary" href="/contacts/edit/{{{_id}}}"><i class="fas fa-edit"></i></a>
+              <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modal-{{{_id}}}"><i
+                  class="fas fa-trash"></i></a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-{{{_id}}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            You are going to delete your contact named {{{name}}} {{{surname}}}. Click <i>Yes, delete</i> if you are
+            <strong>completely</strong> sure.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <form action="/contacts/delete/{{{_id}}}?_method=DELETE" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger">Yes, delete</button>
             </form>
           </div>
         </div>
       </div>
+    </div>
+
     {{else}}
     <div class="col-md-5 mx-auto">
-        <div class="alert alert-primary text-center" role="alert">
+      <div class="alert alert-primary text-center" role="alert">
         <h4 class="alert-heading">You don't have any contact yet!</h4>
         <a class="btn btn-success text-center" href="/contacts/add">Add one!</a>
       </div>
